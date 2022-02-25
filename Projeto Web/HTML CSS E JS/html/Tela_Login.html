@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Login</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-image: linear-gradient(50deg, black, rgba(255, 255, 0, 0.041));
+            background-color: #fff;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        
+        div {
+            width: 50%;
+            height: 99%;
+        }
+        
+        #img {
+            position: absolute;
+            border-radius: 15px;
+            color: #fff;
+        }
+        
+        #login {
+            width: 39vw;
+            height: 50vh;
+            background-color: rgba(0, 0, 0, 0.9);
+            /*position: absolute;*/
+            padding: 80px;
+            left: 50vw;
+            border-radius: 15px;
+            color: #fff;
+        }
+        
+        input {
+            padding: 15px;
+            border: none;
+            outline: none;
+            font-size: 15px;
+        }
+        
+        button {
+            background-color: dodgerblue;
+            border: none;
+            padding: 15px;
+            width: 15px;
+            border-radius: 10px;
+            color: white;
+            font-size: 15px;
+        }
+        
+        button:hover {
+            background-color: deepskyblue;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="img">
+        <h1>Teste</h1>
+    </div>
+
+    <div id="login">
+        <h1>Login</h1>
+        <input type="text" name="Matricula" id="Matricula" placeholder="Matricula">
+        <br><br>
+        <input type="password" placeholder="Senha">
+        <br><br>
+        <button>Enviar</button>
+    </div>
+
+</body>
+
+</html>
