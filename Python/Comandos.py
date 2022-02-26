@@ -1,7 +1,7 @@
 from select import select
 from sqlite3 import Cursor
 import Conexao
-import teste
+import Cripto
 
 
 def Select_Login():
@@ -14,7 +14,7 @@ def Select_Login():
     return dados
 
 def Insert_Login(usuario,senha,cargo):
-    senha = teste.Cripto(senha)
+    senha = Cripto.Cripto(senha)
     conn = Conexao.Conectar()
     comandos = conn.cursor()
     comandos.execute("INSERT INTO login(login,senha,cargo)values('"+usuario+"','"+senha+"','"+cargo+"');")
@@ -22,6 +22,7 @@ def Insert_Login(usuario,senha,cargo):
     Conexao.Desconectar(conn)
     
 def Editar_Login(id,usuario,senha,cargo):
+    senha = Cripto.Cripto(senha)
     conn = Conexao.Conectar()
     comandos = conn.cursor()
     comandos.execute("UPDATE login SET usuario = '"+usuario+"',senha ='"+senha+"',cargo='"+cargo+"' WHERE (id ='"+id+"');")
