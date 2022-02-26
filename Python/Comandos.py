@@ -1,6 +1,7 @@
 from select import select
 from sqlite3 import Cursor
 import Conexao
+import teste
 
 
 def Select_Login():
@@ -13,23 +14,24 @@ def Select_Login():
     return dados
 
 def Insert_Login(usuario,senha,cargo):
+    senha = teste.Cripto(senha)
     conn = Conexao.Conectar()
     comandos = conn.cursor()
-    comandos.execute("INSERT INTO Login(login,senha,cargo)values('"+usuario+"','"+senha+"','"+cargo+"');")
+    comandos.execute("INSERT INTO login(login,senha,cargo)values('"+usuario+"','"+senha+"','"+cargo+"');")
     conn.commit()
     Conexao.Desconectar(conn)
     
 def Editar_Login(id,usuario,senha,cargo):
     conn = Conexao.Conectar()
     comandos = conn.cursor()
-    comandos.execute("UPDATE Login SET usuario = '"+usuario+"',senha ='"+senha+"',cargo='"+cargo+"' WHERE (id ='"+id+"');")
+    comandos.execute("UPDATE login SET usuario = '"+usuario+"',senha ='"+senha+"',cargo='"+cargo+"' WHERE (id ='"+id+"');")
     conn.commit()
     Conexao.Desconectar(conn)
     
 def Delete_Login(id):
     conn = Conexao.Conectar()
     comandos = conn.cursor()
-    comandos.execute("DELETE FROM Login WHERE (id = '"+id+"');")
+    comandos.execute("DELETE FROM login WHERE (id = '"+id+"');")
     conn.commit()
     Conexao.Desconectar(conn)
 
