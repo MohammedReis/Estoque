@@ -1,0 +1,36 @@
+#CARGOS E PERMISSIONAMENTOS
+    #ADM ACESSO A TODAS A FUNÇOES DO SISTEMA E O UNICO QUE PODE CADASTRAR USUARIO
+    #RH - É O UNICO QUE PODE CADASTRAR FUNCIONARIOS
+    #TEC DE SEGURANCA - FAZ SOLICITACAO DE EPI
+    #ESTOQUEISTA - FAZ SEPARAÇÃO DE EPI'S, ADICIONA, NOVOS FORNECEDORES E NOVOS EPI'S AO ESTOQUE, REMOVE FORNECEDORES E SOLICITA A EDICAO DO ESTOQUE QUANDO NECESSARIA
+    
+#cadastrar Funcionarios
+###################################################################
+#### APENAS 1 USUARIO TEM PERMISSÃO PARA CADASTRAR FUNCIONARIOS ###
+###################################################################
+    #1 Verificar se todos os campos estãp preenchidos
+    #2 Chamar a função Insert_Funcionarios(Matricula,Nome,Cpf,Base,Data_Admissao,Data_Demissao)
+    
+#Cadastrar Usuario
+##############################################################
+#### APENAS 1 USUARIO TEM PERMISSÃO PARA CADASTRAR USUARIO ###
+##############################################################
+    #1 Verificar se todos os campos estãp preenchidos
+    #2 Chamar a função Verificar_Funcionarios(CPF):
+        #2.1 Se return for != [] usuario é um fincionario e pode segui com o cadasotro
+            #2.1.1 Chamar a função Insert_Login(usuario,senha,cargo,matricula)
+        #2.2 Se return for == [] o usuario não é um fincionario ou digitou alguma informação errada
+            #2.2.1 Retornar ao formulario
+
+#Cadastrar Fornecedor
+    #1 Verificar se todos os campos estãp preenchidos
+    #2 Chamar a função Insert_Fornecedor(Fornecedor,CNPJ,Endereco)
+    #3 Chamar a função Insert_Fornecedor_Contato(CNPJ,Telefone,Email)
+    
+#Cadastrar EPI'S
+    #1 Verificar se todos os campos estãp preenchidos
+    #2 verificar se o Epi ja exite no BD com a funcao Verificar_Epi(cod)
+        #2.1 Se o return for == [] o epi pode ser cadastrado
+            #2.1.1 Chamar a função Insert_Epi(Epis,cod,tipo,quantidade,tamanho,estoque_minimo)
+        #2.2 Se o return for != [] o epi não pode ser cadastrado
+            #2.2.1 Retornar ao formulario

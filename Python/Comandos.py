@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 from select import select
 from sqlite3 import Cursor
 import Conexao
@@ -13,19 +14,19 @@ def Select_Login():
     Conexao.Desconectar(conn)
     return dados
 
-def Insert_Login(usuario,senha,cargo):
+def Insert_Login(usuario,senha,cargo,matricula):
     senha = Cripto.Cripto(senha)
     conn = Conexao.Conectar()
     comandos = conn.cursor()
-    comandos.execute("INSERT INTO login(login,senha,cargo)values('"+usuario+"','"+senha+"','"+cargo+"');")
+    comandos.execute("INSERT INTO login(login,senha,cargo,matricula)values('"+usuario+"','"+senha+"','"+cargo+"','"+matricula+"');")
     conn.commit()
     Conexao.Desconectar(conn)
     
-def Editar_Login(id,usuario,senha,cargo):
+def Editar_Login(id,usuario,senha,cargo,matricula):
     senha = Cripto.Cripto(senha)
     conn = Conexao.Conectar()
     comandos = conn.cursor()
-    comandos.execute("UPDATE login SET usuario = '"+usuario+"',senha ='"+senha+"',cargo='"+cargo+"' WHERE (id ='"+id+"');")
+    comandos.execute("UPDATE login SET usuario = '"+usuario+"',senha ='"+senha+"',cargo='"+cargo+"',matricula = '"+matricula+"' WHERE (id ='"+id+"');")
     conn.commit()
     Conexao.Desconectar(conn)
     
@@ -65,6 +66,15 @@ def Editar_Epi(id,Epis,cod,tipo,quantidade,tamanho,estoque_minimo):
     comandos.execute("UPDATE Epi SET Epis = '"+Epis+"',cod ='"+cod+"',Tipo='"+tipo+"', Quantidade ='"+quantidade+"',Tamanho = '"+tamanho+"',Estoque_minimo ='"+estoque_minimo+"' WHERE (id ='"+id+"');")
     conn.commit()
     Conexao.Desconectar(conn)
+
+def Verificar_Epi(cod):
+    conn = Conexao.Conectar()
+    comandos = conn.cursor()
+    comandos.execute("SELECT * FROM Epi WHERE cod = '"+cod+"';")
+    dados = comandos.fetchall()
+    conn.commit()
+    Conexao.Desconectar(conn)
+    return dados
     
 def Select_Solicitacao():
     conn = Conexao.Conectar()
@@ -75,17 +85,17 @@ def Select_Solicitacao():
     Conexao.Desconectar(conn)
     return dados
 
-def Inserir_Solicitacao(usuario,Epis,cod,Tipo,Quantidade,Tamanho,Dia):
+def Inserir_Solicitacao(usuario,Matricula,Epis,cod,Tipo,Quantidade,Tamanho,Dia):
     conn = Conexao.Conectar()
     comandos = conn.cursor()
-    comandos.execute("INSERT INTO Solicitacao(usuario,Epis,cod,Tipo,Quantidade,Tamanho,Dia)values('"+usuario+"','"+Epis+"','"+cod+"','"+Tipo+"','"+Quantidade+"','"+Tamanho+"','"+Dia+"');")
+    comandos.execute("INSERT INTO Solicitacao(usuario,Matricula,Epis,cod,Tipo,Quantidade,Tamanho,Dia)values('"+usuario+"','"+Matricula+"','"+Epis+"','"+cod+"','"+Tipo+"','"+Quantidade+"','"+Tamanho+"','"+Dia+"');")
     conn.commit()
     Conexao.Desconectar(conn)  
 
-def Editar_Solicitacao(id,usuario,Epis,cod,Tipo,Quantidade,Tamanho,Dia):
+def Editar_Solicitacao(id,usuario,Matricula,Epis,cod,Tipo,Quantidade,Tamanho,Dia):
     conn = Conexao.Conectar()
     comandos = conn.cursor()
-    comandos.execute("UPDATE Solicitacao SET usuario = '"+usuario+"',Epis = '"+Epis+"',cod ='"+cod+"',Tipo='"+Tipo+"', Quantidade ='"+Quantidade+"',Tamanho = '"+Tamanho+"',Dia='"+Dia+"' WHERE (id ='"+id+"');")
+    comandos.execute("UPDATE Solicitacao SET usuario = '"+usuario+"',Matricula = '"+Matricula+"' ,Epis = '"+Epis+"',cod ='"+cod+"',Tipo='"+Tipo+"', Quantidade ='"+Quantidade+"',Tamanho = '"+Tamanho+"',Dia='"+Dia+"' WHERE (id ='"+id+"');")
     conn.commit()
     Conexao.Desconectar(conn)   
     
@@ -125,6 +135,15 @@ def Delete_Funcionarios(id):
     comandos.execute("DELETE FROM Funcionarios WHERE (id = '"+id+"');")
     conn.commit()
     Conexao.Desconectar(conn)
+
+def Verificar_Funcionarios(CPF):
+    conn = Conexao.Conectar()
+    comandos = conn.cursor()
+    comandos.execute("SELECT * FROM Funcionarios WHERE CPF = '"+CPF+"';")
+    dados = comandos.fetchall()
+    conn.commit()
+    Conexao.Desconectar(conn)
+    return dados
 
 def Select_Tamanho():
     conn = Conexao.Conectar()
