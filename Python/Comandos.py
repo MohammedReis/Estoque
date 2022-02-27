@@ -5,10 +5,11 @@ import Conexao
 import Cripto
 
 
-def Select_Login():
+def Select_Login(login,senha):
+    senha = Cripto.Cripto(senha)
     conn = Conexao.Conectar()
     comandos = conn.cursor()
-    comandos.execute("SELECT * FROM login;")
+    comandos.execute("select * from login where login= '" + login + "' and senha = '" + senha + "';")
     dados = comandos.fetchall()
     conn.commit()
     Conexao.Desconectar(conn)
@@ -234,3 +235,4 @@ def Delete_Fornecedor_Contato(id):
     comandos.execute("DELETE FROM Fornecedor_Contato WHERE (id = '"+id+"');")
     conn.commit()
     Conexao.Desconectar(conn)
+
